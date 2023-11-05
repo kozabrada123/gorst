@@ -1,6 +1,8 @@
 # gorst
 Gorst (Go Rust Terminal) is a simple rust app for playing Go in the terminal.
 
+<img src="https://raw.githubusercontent.com/kozabrada123/gorst/main/assets/demo.png" alt="gorst demo" width="512"/>
+
 ## Installation
 
 To install, clone the github repo and run `cargo install --path .`.
