@@ -9,6 +9,16 @@ Then you run the app with `gorst`.
 
 Note: it is recommended to use a terminal which supports runtime font scaling (such as [Alacritty](https://github.com/alacritty/alacritty)), since gorst uses single character rendering, which can look quite small.
 
+By default, the app will use a 9x9 board size.
+
+You can set a custom board size with a command line argument: `gorst <size>`
+
+For example:
+
+For a 13x13 board: `gorst 13`
+
+For a 19x19 board: `gorst 19`
+
 ## Usage
 
 After running the app, the starting Go board will be rendered, along with two counters: `B: 0` and `W: 0`.

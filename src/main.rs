@@ -116,7 +116,20 @@ impl BoardState {
 }
 
 fn main() {
-    let mut boardstate = BoardState::new();
+    let mut board_size = 9;
+
+    // Optionally provide the board size as the first argument
+    if let Some(size_str) = std::env::args().nth(1) {
+        if let Ok(size_as_num) = size_str.parse::<usize>() {
+            board_size = size_as_num;
+        }
+    }
+
+    let mut boardstate = BoardState {
+        board: Board::new(board_size),
+        white_prisoners: 0,
+        black_prisoners: 0,
+    };
 
     // The various states of the board in history, used for undos
     let mut history: Vec<BoardState> = vec![boardstate.clone()];

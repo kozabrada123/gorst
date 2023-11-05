@@ -40,14 +40,28 @@ pub fn render_board(board: &Board) {
     print!("{}{}{}", ANSI_BASE, ANSI_SET_FG, LINE_COLOR);
 
     for x in 0..board.size() {
-        print!("{} ", x + 1);
+        let mut num_string = (x + 1).to_string();
+
+        while num_string.len() < 2 {
+            num_string.push(' ');
+        }
+
+        print!("{}", num_string);
     }
+    // Print a space in the end to fill the board top right corner
+    print!(" ");
 
     print!("\n");
 
     for y in 0..board.size() {
         for x in 0..board.size() {
             let state = data[y][x];
+
+            let mut y_indicator_string = (y + 1).to_string();
+
+            while y_indicator_string.len() < 2 {
+                y_indicator_string.push(' ');
+            }
 
             print!("{}{}{}", ANSI_BASE, ANSI_SET_BG, BG_COLOR);
 
@@ -57,7 +71,7 @@ pub fn render_board(board: &Board) {
                     if x == 0 {
                         print!("{}", BOX_TL_CORNER);
                     } else if x == board.size() - 1 {
-                        print!("{} {}", BOX_TR_CORNER, y + 1);
+                        print!("{} {}", BOX_TR_CORNER, y_indicator_string);
                     } else {
                         print!("{}", BOX_TOP_EDGE);
                     }
@@ -65,7 +79,7 @@ pub fn render_board(board: &Board) {
                     if x == 0 {
                         print!("{}", BOX_BL_CORNER);
                     } else if x == board.size() - 1 {
-                        print!("{} {}", BOX_BR_CORNER, y + 1);
+                        print!("{} {}", BOX_BR_CORNER, y_indicator_string);
                     } else {
                         print!("{}", BOX_BOTTOM_EDGE);
                     }
@@ -73,7 +87,7 @@ pub fn render_board(board: &Board) {
                     if x == 0 {
                         print!("{}", BOX_LEFT_EDGE);
                     } else if x == board.size() - 1 {
-                        print!("{} {}", BOX_RIGHT_EDGE, y + 1);
+                        print!("{} {}", BOX_RIGHT_EDGE, y_indicator_string);
                     } else {
                         print!("{}", BOX_INTERSECTION);
                     }
@@ -91,7 +105,7 @@ pub fn render_board(board: &Board) {
                 print!("{}", WHITE_STONE);
                 if x == board.size() - 1 {
                     print!("{}{}{}", ANSI_BASE, ANSI_SET_FG, LINE_COLOR);
-                    print!(" {}", y + 1);
+                    print!(" {}", y_indicator_string);
                 }
             }
 
