@@ -35,6 +35,6 @@ Every interaction with the go board and game is done via text commands, inputed 
 |----------------|---------------------------------------------|
 | exit / quit    | Closes the program                          |
 | u / undo       | Undos the last move                         |
-| i;{x};{y}      | Prints the liberties of the stone at (x, y) |
+| in;{x};{y}     | Prints the liberties of the stone at (x, y) |
 | {x};{y};w      | Places a white stone at (x, y)              |
 | {x};{y};b      | Places a black stone at (x, y)              |
