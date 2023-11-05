@@ -32,6 +32,9 @@ pub const BLACK_COLOR: &str = "0;0;34m";
 // Horizontally we insert a line after each character to show a proper square in the terminal
 pub const BOX_LINE: char = '─';
 
+/// The english alphabet, used instead of number for x values
+pub const ASCII: &str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
 /// Renders a board to stdout.
 pub fn render_board(board: &Board) {
     let data = board.get_data();
@@ -40,13 +43,13 @@ pub fn render_board(board: &Board) {
     print!("{}{}{}", ANSI_BASE, ANSI_SET_FG, LINE_COLOR);
 
     for x in 0..board.size() {
-        let mut num_string = (x + 1).to_string();
-
-        while num_string.len() < 2 {
-            num_string.push(' ');
+        if x > board.size() {
+            panic!("Max board size is 26x26");
         }
 
-        print!("{}", num_string);
+        let num_string = ASCII.chars().nth(x).unwrap();
+
+        print!("{} ", num_string);
     }
     // Print a space in the end to fill the board top right corner
     print!(" ");

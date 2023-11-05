@@ -181,24 +181,42 @@ fn parse_move(
         return Ok(());
     }
 
-    // i;5;5
+    // in;5;5
     // info;5;5
     // Prints stone liberties
-    if lower.contains("i") || lower.contains("info") {
+    if lower.contains("in") || lower.contains("info") {
         let params = lower
             .replace(" ", "")
             .split(";")
             .map(|x| x.to_string())
             .collect::<Vec<String>>();
 
-        let x_res = params.get(1).unwrap().parse::<usize>();
+        let x_as_ascii = params
+            .get(1)
+            .unwrap()
+            .to_uppercase()
+            .chars()
+            .nth(0)
+            .unwrap();
+
+        let mut asci_chars = rendering::ASCII.chars();
+
+        let mut x_res: Option<usize> = None;
+
+        for i in 0..rendering::ASCII.len() {
+            if asci_chars.next().unwrap() == x_as_ascii {
+                x_res = Some(i);
+                break;
+            }
+        }
+
         let y_res = params.get(2).unwrap().parse::<usize>();
 
-        if x_res.is_err() || y_res.is_err() {
+        if x_res.is_none() || y_res.is_err() {
             return Err(errors::GoError::InvalidMove);
         }
 
-        let x = x_res.unwrap() - 1;
+        let x = x_res.unwrap();
         let y = y_res.unwrap() - 1;
 
         let direct = boardstate.board.interesection_direct_liberties(x, y);
@@ -228,16 +246,34 @@ fn parse_move(
             .map(|x| x.to_string())
             .collect::<Vec<String>>();
         // x;y;w|b|e
-        // x, y, white / black / empty
+        // x, y, white / black
 
-        let x_res = params.get(0).unwrap().parse::<usize>();
+        let x_as_ascii = params
+            .get(0)
+            .unwrap()
+            .to_uppercase()
+            .chars()
+            .nth(0)
+            .unwrap();
+
+        let mut asci_chars = rendering::ASCII.chars();
+
+        let mut x_res: Option<usize> = None;
+
+        for i in 0..rendering::ASCII.len() {
+            if asci_chars.next().unwrap() == x_as_ascii {
+                x_res = Some(i);
+                break;
+            }
+        }
+
         let y_res = params.get(1).unwrap().parse::<usize>();
 
-        if x_res.is_err() || y_res.is_err() {
+        if x_res.is_none() || y_res.is_err() {
             return Err(errors::GoError::InvalidMove);
         }
 
-        let x = x_res.unwrap() - 1;
+        let x = x_res.unwrap();
         let y = y_res.unwrap() - 1;
 
         let state = params.get(2);
