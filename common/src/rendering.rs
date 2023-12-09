@@ -32,9 +32,6 @@ pub const BLACK_COLOR: &str = "0;0;34m";
 // Horizontally we insert a line after each character to show a proper square in the terminal
 pub const BOX_LINE: char = '─';
 
-/// The english alphabet, used instead of number for x values
-pub const ASCII: &str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
 /// Renders a board to stdout.
 pub fn render_board(board: &Board) {
     let data = board.get_data();
@@ -47,7 +44,7 @@ pub fn render_board(board: &Board) {
             panic!("Max board size is 26x26");
         }
 
-        let num_string = ASCII.chars().nth(x).unwrap();
+        let num_string = crate::ASCII.chars().nth(x).unwrap();
 
         print!("{} ", num_string);
     }

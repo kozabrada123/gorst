@@ -1,5 +1,5 @@
 [package]
-name = "gorst"
+name = "gorst-common"
 version = "0.1.0"
 edition = "2021"
 
@@ -7,4 +7,3 @@ edition = "2021"
 
 [dependencies]
 custom_error = "1.9.2"
-inquire = "0.6.2"

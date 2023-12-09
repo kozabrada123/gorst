@@ -3,7 +3,7 @@ use crate::rendering;
 use std::collections::HashSet;
 use std::fmt;
 
-#[derive(Clone, Copy, PartialEq, Eq, Debug, Default)]
+#[derive(Clone, Copy, PartialEq, Eq, Debug, Default, PartialOrd, Ord)]
 /// Describes possible state of an intersection;
 /// It can be empty, filled with a black stone or filled with a white stone.
 pub enum IntersectionState {
@@ -288,7 +288,9 @@ impl fmt::Debug for Board {
     }
 }
 
+#[cfg(test)]
 mod tests {
+
     use std::collections::HashSet;
 
     #[test]
